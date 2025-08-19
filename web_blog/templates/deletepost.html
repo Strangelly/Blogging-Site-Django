@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}   
+    <h1>Delete post</h1>
+    <br>
+    <h3>Delete: {{ post.title }}</h3>
+
+    <div class="mb-3"></div>
+        <form method="POST">
+        
+            {% csrf_token %}
+            <strong>Are You Sure You Want To Delete This Post?</strong></br></br>
+            <button class="btn btn-secondary">Delete Post</button>
+    </div>
+{% else %}
+    Login to delete a post
+
+{% endif %}
+
+{% endblock %}
+

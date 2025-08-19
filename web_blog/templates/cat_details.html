@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if category_post %}
+    <h1>{{ cats }} Category</h1>
+
+    <ul>
+    {% for post in category_post %}
+    <li><a href="{% url 'article_detail' post.pk %}"> 
+        {{ post.title }}</a> - 
+        <b> {{ post.author.username }} </b> -
+        <small> {{ post.created_at }} </small>        
+        {% if user.is_authenticated %}   
+            - <small>
+                <a href="{% url 'editpost' post.pk %}">Edit</a>
+                <a href="{% url 'delete_post' post.pk %}">(Delete)</a>  
+            </small>
+        {% endif %}
+        <br>
+        {{ post.body | slice:":200" }}
+    </li>
+    {% endfor %}
+    </ul>
+
+{% else %}
+    <H2>Sorry this page doesnt exist</H2>
+{% endif %}
+
+
+{% endblock %}
